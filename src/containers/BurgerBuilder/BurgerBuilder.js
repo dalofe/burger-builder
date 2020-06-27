@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import axios from '../../axios-orders';
 import Aux from '../../hoc/_Aux/_Aux';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
@@ -7,7 +7,6 @@ import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
-import axios from '../../axios-orders';
 import { connect } from 'react-redux';
 import * as burgerBuilderActions from '../../store/actions/index';
 
@@ -22,19 +21,11 @@ class BurgerBuilder extends Component {
         //totalPrice: 4,
         //purchasable: false,
         purchasing: false,
-        loading: false,
-        error: false
+        
     }
 
     componentDidMount () {
         console.log(this.props);
-        // axios.get('/ingredients.json')
-        //     .then( response => {
-        //         this.setState( { ingredients: response.data } );
-        //     } )
-        //     .catch( error => {
-        //         this.setState( { error: true } );
-        //     } );
     }
 
     updatePurchaseState ( ingredients ) {
@@ -144,9 +135,7 @@ class BurgerBuilder extends Component {
                 purchaseCancelled={this.purchaseCancelHandler}
                 purchaseContinued={this.purchaseContinueHandler} />;
         }
-        if ( this.state.loading ) {
-            orderSummary = <Spinner />;
-        }
+        
         // {salad: true, meat: false, ...}
         return (
             <Aux>
